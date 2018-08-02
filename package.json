@@ -1,0 +1,31 @@
+{
+  "name": "learn-expressjs",
+  "version": "0.1.0",
+  "description": "Learn ExpressJS",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "node index.js",
+    "mon": "nodemon index",
+    "dev": "node-dev index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gunturkh/learn-expressjs.git"
+  },
+  "keywords": [
+    "ExpressJS",
+    "nodeJS",
+    "Learn"
+  ],
+  "author": "Guntur Kurniawan Heryanto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gunturkh/learn-expressjs/issues"
+  },
+  "homepage": "https://github.com/gunturkh/learn-expressjs#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  }
+}
