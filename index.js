@@ -16,8 +16,8 @@ app.post("/", controllers.displayName)
 app.get("/todos", todos.display)
 app.post("/todos", todos.add)
 
-app.get("/todos:id",todos.displayId)
-app.post("/todos:id",todos.add)
+app.get("/todos/:id",todos.selectId)
+app.post("/todos/:id",todos.add)
 
 
 app.listen(port, () => {

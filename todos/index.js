@@ -8,10 +8,13 @@ const todos = {
         res.status(200).send(TODOS);
     },
 
-    displayId: (req,res) => {
-        res.status(200).send(req.params)
+    selectId: (req, res) => {
+        res.status(200).send(TODOS[req.params.id])
+        console.log(req.params.id);
+        
+        
     },
-    
+
     add: (req, res) => {
         const data = {
             id: TODOS.length,
@@ -25,7 +28,7 @@ const todos = {
         fs.writeFileSync(todosJSON, todosString, 'utf8');
 
         res.status(201).send(data)
-    }
+    },
 };
 
 module.exports = todos;
