@@ -24,7 +24,7 @@ const todos = {
 
     add: (req, res) => {
         const data = {
-            id: TODOS.length+1,
+            id: TODOS.length + 1,
             text: req.body.text
         }
         console.log(req.body.text)
@@ -40,7 +40,7 @@ const todos = {
 
     saveTodo: (req, res) => {
         const data = {
-            id: req.body.id+1,
+            id: req.body.id + 1,
             text: req.body.text
         }
         res.status(200).send(data)
@@ -53,7 +53,7 @@ const todos = {
         const todosString = JSON.stringify(data, null, 2)
 
         fs.writeFileSync(todosJSON, todosString, 'utf8');
-        
+
         res.status(200).send(data)
     },
 
@@ -62,10 +62,8 @@ const todos = {
             return item.id === Number(req.params.id)
         })
         if (data) {
-
             delete data['text']
             delete data['id']
-
         }
         else {
             res.status(404).send({ message: "Id not found" })
@@ -82,9 +80,8 @@ const todos = {
                 id: req.params.id,
                 text: req.body.text
             }
-
-            data["id"]=updateData.id
-            data["text"]=updateData.text
+            data["id"] = updateData.id
+            data["text"] = updateData.text
             res.status(200).send(data)
         }
         else {
