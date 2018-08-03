@@ -18,7 +18,6 @@ app.post("/todos", todos.add)
 app.delete("/todos",todos.deleteTodos)
 
 app.get("/todos/:id",todos.getOnebyId)
-app.post("/todos/:id",todos.saveTodo)
 app.delete("/todos/:id",todos.deleteTodobyId)
 app.put("/todos/:id", todos.updateTodobyId)
 

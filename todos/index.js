@@ -21,7 +21,7 @@ const todos = {
             })
         }
     },
-
+// Use Counter
     add: (req, res) => {
         const data = {
             id: TODOS.length + 1,
@@ -58,12 +58,13 @@ const todos = {
     },
 
     deleteTodobyId: (req, res) => {
-        const data = TODOS.find(item => {
-            return item.id === Number(req.params.id)
+        const data = TODOS.filter(item => {
+            return item.id !== Number(req.params.id)
         })
         if (data) {
-            delete data['text']
-            delete data['id']
+            const todosString = JSON.stringify(data, null, 2)
+            fs.writeFileSync(todosJSON, todosString, 'utf8');
+            res.status(200).send(data)
         }
         else {
             res.status(404).send({ message: "Id not found" })
