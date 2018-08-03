@@ -13,11 +13,14 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.get("/", controllers.displayInfo)
 app.post("/", controllers.displayName)
 
-app.get("/todos", todos.display)
+app.get("/todos", todos.get)
 app.post("/todos", todos.add)
+app.delete("/todos",todos.deleteTodos)
 
-app.get("/todos/:id",todos.selectId)
-app.post("/todos/:id",todos.add)
+app.get("/todos/:id",todos.getOnebyId)
+app.post("/todos/:id",todos.saveTodo)
+app.delete("/todos/:id",todos.deleteTodobyId)
+app.put("/todos/:id", todos.updateTodobyId)
 
 
 app.listen(port, () => {
