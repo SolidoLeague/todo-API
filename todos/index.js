@@ -9,7 +9,7 @@ const todos = {
     },
 
     getOnebyId: (req, res) => {
-        const data = TODOS.find(item => {
+        const data = TODOS.data.find(item => {
             return item.id === Number(req.params.id)
         })
         if (data) {
@@ -21,15 +21,18 @@ const todos = {
             })
         }
     },
-// Use Counter
+    // Use Counter
     add: (req, res) => {
+        if (req.body.text) {
+            TODOS.counter += 1
+        }
         const data = {
-            id: TODOS.length + 1,
+            id: TODOS.counter,
             text: req.body.text
         }
         console.log(req.body.text)
 
-        TODOS.push(data)
+        TODOS.data.push(data)
 
         const todosString = JSON.stringify(TODOS, null, 2)
 
@@ -48,7 +51,10 @@ const todos = {
 
     deleteTodos: (req, res) => {
         let data = TODOS
-        data = []
+        data = {
+            counter: 0,
+            data: []
+        }
 
         const todosString = JSON.stringify(data, null, 2)
 
@@ -58,11 +64,15 @@ const todos = {
     },
 
     deleteTodobyId: (req, res) => {
-        const data = TODOS.filter(item => {
+        const data = TODOS.data.filter(item => {
             return item.id !== Number(req.params.id)
         })
+        const data_JSON = {
+            counter: TODOS.counter,
+            data: data
+        }
         if (data) {
-            const todosString = JSON.stringify(data, null, 2)
+            const todosString = JSON.stringify(data_JSON, null, 2)
             fs.writeFileSync(todosJSON, todosString, 'utf8');
             res.status(200).send(data)
         }
@@ -72,7 +82,7 @@ const todos = {
     },
 
     updateTodobyId: (req, res) => {
-        const data = TODOS.find(item => {
+        const data = TODOS.data.find(item => {
             return item.id === Number(req.params.id)
         })
 
