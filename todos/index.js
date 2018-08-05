@@ -12,9 +12,9 @@ const errorMessage = (messageFill) => {
     return {message: messageFill};
 }
 
-const request = (key) => {
-    return req.body.key;
-}
+// const request = (key) => {
+//     return req.body.key;
+// }
 
 const todos = {
     get: (req, res) => {
@@ -32,24 +32,32 @@ const todos = {
     },
 
     add: (req, res) => {
+        todoTask = req.body.task;
+        todoPriority = req.body.priority;
+        todoDeadline = req.body.deadline;
 
+        if(todoTask && todoPriority && todoDeadline) {
+            TODOS.idCounter += 1;
 
-        // if (req.body.text) {
-        //     TODOS.counter += 1
-        // }
-        // const data = {
-        //     id: TODOS.counter,
-        //     text: req.body.text
-        // }
-        // console.log(req.body.text)
+            const todoData = {
+                id: TODOS.idCounter,
+                task: todoTask,
+                priority: todoPriority,
+                deadline: todoDeadline
+            }
 
-        // TODOS.data.push(data)
+            TODOS.todos.push(todoData);
 
-        // const todosString = JSON.stringify(TODOS, null, 2)
+            const todosString = JSON.stringify(TODOS, null, 2);
+            fs.writeFileSync(todosJSON, todosString, 'utf8');
 
-        // fs.writeFileSync(todosJSON, todosString, 'utf8');
+            console.log(todoData);
 
-        // res.status(201).send(data)
+            res.status(201).send(todoData);
+        }
+        else{
+            res.status(400).send(errorMessage("You have to add all of your data properties"))
+        }
     },
 
     getOnebyCharacters: (req, res) => {
