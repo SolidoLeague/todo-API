@@ -3,103 +3,106 @@ const fs = require("fs")
 const todosJSON = "./data/todos.json"
 const TODOS = JSON.parse(fs.readFileSync(todosJSON, 'utf8'))
 
+// const respond = (res, code, data) => {
+//     const value = res.status(code).send(data);
+//     return value;
+// }
+
+const errorMessage = (messageFill) => {
+    return {message: messageFill};
+}
+
+const request = (key) => {
+    return req.body.key;
+}
+
 const todos = {
     get: (req, res) => {
-        res.status(200).send(TODOS);
+        // if (TODOS.todos) 
+        //     respond(200, TODOS.todos);
+        // else 
+        //     respond(400, errorMessage("Todo data list is empty"));
+
+        if (TODOS.todos){
+            res.status(200).send(TODOS.todos);
+        }
+        else{
+            res.status(400).send(errorMessage("Your todo list is empty. Please add new todo list"));
+        }
     },
 
-    getOnebyId: (req, res) => {
-        const data = TODOS.data.find(item => {
-            return item.id === Number(req.params.id)
-        })
-        if (data) {
-            res.status(200).send(data)
-        }
-        else {
-            res.status(400).send({
-                message: "Id is not found"
-            })
-        }
-    },
-    // Use Counter
     add: (req, res) => {
-        if (req.body.text) {
-            TODOS.counter += 1
-        }
-        const data = {
-            id: TODOS.counter,
-            text: req.body.text
-        }
-        console.log(req.body.text)
 
-        TODOS.data.push(data)
 
-        const todosString = JSON.stringify(TODOS, null, 2)
+        // if (req.body.text) {
+        //     TODOS.counter += 1
+        // }
+        // const data = {
+        //     id: TODOS.counter,
+        //     text: req.body.text
+        // }
+        // console.log(req.body.text)
 
-        fs.writeFileSync(todosJSON, todosString, 'utf8');
+        // TODOS.data.push(data)
 
-        res.status(201).send(data)
+        // const todosString = JSON.stringify(TODOS, null, 2)
+
+        // fs.writeFileSync(todosJSON, todosString, 'utf8');
+
+        // res.status(201).send(data)
     },
 
-    saveTodo: (req, res) => {
-        const data = {
-            id: req.body.id + 1,
-            text: req.body.text
-        }
-        res.status(200).send(data)
-    },
-
-    deleteTodos: (req, res) => {
-        let data = TODOS
-        data = {
-            counter: 0,
-            data: []
-        }
-
-        const todosString = JSON.stringify(data, null, 2)
-
-        fs.writeFileSync(todosJSON, todosString, 'utf8');
-
-        res.status(200).send(data)
-    },
-
-    deleteTodobyId: (req, res) => {
-        const data = TODOS.data.filter(item => {
-            return item.id !== Number(req.params.id)
-        })
-        const data_JSON = {
-            counter: TODOS.counter,
-            data: data
-        }
-        if (data) {
-            const todosString = JSON.stringify(data_JSON, null, 2)
-            fs.writeFileSync(todosJSON, todosString, 'utf8');
-            res.status(200).send(data)
-        }
-        else {
-            res.status(404).send({ message: "Id not found" })
-        }
+    getOnebyCharacters: (req, res) => {
+        // const data = TODOS.data.find(item => {
+        //     return item.id === Number(req.params.id)
+        // })
+        // if (data) {
+        //     res.status(200).send(data)
+        // }
+        // else {
+        //     res.status(400).send({
+        //         message: "Id is not found"
+        //     })
+        // }
     },
 
     updateTodobyId: (req, res) => {
-        const data = TODOS.data.find(item => {
-            return item.id === Number(req.params.id)
-        })
+        // const data = TODOS.data.find(item => {
+        //     return item.id === Number(req.params.id)
+        // })
 
-        if (data) {
-            const updateData = {
-                id: req.params.id,
-                text: req.body.text
-            }
-            data["id"] = updateData.id
-            data["text"] = updateData.text
-            res.status(200).send(data)
-        }
-        else {
-            res.status(404).send({
-                message: "Id not found"
-            })
-        }
+        // if (data) {
+        //     const updateData = {
+        //         id: req.params.id,
+        //         text: req.body.text
+        //     }
+        //     data["id"] = updateData.id
+        //     data["text"] = updateData.text
+        //     res.status(200).send(data)
+        // }
+        // else {
+        //     res.status(404).send({
+        //         message: "Id not found"
+        //     })
+        // }
+    },
+
+    deleteTodobyId: (req, res) => {
+        // const data = TODOS.data.filter(item => {
+        //     return item.id !== Number(req.params.id)
+        // })
+        // const data_JSON = {
+        //     counter: TODOS.counter,
+        //     data: data
+        // }
+        // if (data) {
+        //     const todosString = JSON.stringify(data_JSON, null, 2)
+        //     fs.writeFileSync(todosJSON, todosString, 'utf8');
+        //     res.status(200).send(data)
+        // }
+        // else {
+        //     res.status(404).send({ message: "Id not found" })
+        // }
     }
 };
 
