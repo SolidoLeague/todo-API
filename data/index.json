@@ -1,0 +1,28 @@
+{
+    "todos": [
+        {
+            "id": 1,
+            "activity": "Learning Node.JS",
+            "priority": "high",
+            "deadline": "2018-08-14"
+        },
+        {
+            "id": 2,
+            "activity": "Learning RESTful API",
+            "priority": "medium",
+            "deadline": "2018-08-20"
+        },
+        {
+            "id": 3,
+            "activity": "Hangout with friends",
+            "priority": "low",
+            "deadline": "2018-08-12"
+        },
+        {
+            "id" : 4,
+            "activity": "Make some summaries of previous class",
+            "priority": "high",
+            "deadline": "2018-08-06"
+        }
+    ]
+}
