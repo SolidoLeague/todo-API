@@ -11,11 +11,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/todos", todos.get);
 app.post("/todos", todos.add);
-app.put("/todos", todos.add);
 
-app.get("/todos/search",todos.getOnebyCharacter);
+app.get("/todos/:search",todos.getOnebyCharacters);
 
-app.delete("/todos/:id",todos.deleteTodobyId)
+// app.put("/todos/:id", todos.updateTodoById);
+// app.delete("/todos/:id",todos.deleteTodoById)
 
 
 app.listen(port, () => {
