@@ -1,0 +1,37 @@
+{
+    "todos": [
+        {
+            "id": 1,
+            "task": "Learning Node.JS",
+            "priority": "high",
+            "deadline": "2018-08-14"
+        },
+        {
+            "id": 2,
+            "task": "Learning RESTful API",
+            "priority": "medium",
+            "deadline": "2018-08-20"
+        },
+        {
+            "id": 3,
+            "task": "Hangout with friends",
+            "priority": "low",
+            "deadline": "2018-08-12"
+        },
+        {
+            "id" : 4,
+            "task": "Make some summaries of previous class",
+            "priority": "high",
+            "deadline": "2018-08-06"
+        },
+        {
+            "id" : 5,
+            "task": "Trying out new Express.JS lesson",
+            "priority": "medium",
+            "deadline": "2018-08-11"
+        }
+    ],
+
+    "idCounter": 4
+    
+}
