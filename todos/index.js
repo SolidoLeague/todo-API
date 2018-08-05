@@ -1,6 +1,6 @@
 const fs = require("fs")
 
-const todosJSON = "./data/todos.json"
+const todosJSON = "./data/seed.json"
 const TODOS = JSON.parse(fs.readFileSync(todosJSON, 'utf8'))
 
 // const respond = (res, code, data) => {
