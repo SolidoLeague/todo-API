@@ -22,13 +22,7 @@ const todos = {
         //     respond(200, TODOS.todos);
         // else 
         //     respond(400, errorMessage("Todo data list is empty"));
-
-        if (TODOS.todos){
-            res.status(200).send(TODOS.todos);
-        }
-        else{
-            res.status(400).send(errorMessage("Your todo list is empty. Please add new todo list"));
-        }
+        TODOS.todos ? res.status(200).send(TODOS.todos):res.status(400).send(errorMessage("Your todo list is empty. Please add new todo list"));
     },
 
     add: (req, res) => {
@@ -56,43 +50,59 @@ const todos = {
             res.status(201).send(todoData);
         }
         else{
-            res.status(400).send(errorMessage("You have to add all of your data properties"))
+            res.status(400).send(errorMessage("You have to fill all of your data properties"))
         }
     },
 
     getOnebyCharacters: (req, res) => {
-        // const data = TODOS.data.find(item => {
-        //     return item.id === Number(req.params.id)
-        // })
-        // if (data) {
-        //     res.status(200).send(data)
-        // }
-        // else {
-        //     res.status(400).send({
-        //         message: "Id is not found"
-        //     })
-        // }
+        const searchedTask = String(req.params.search).toLowerCase();
+
+        if (searchedTask){
+            const todoData = TODOS.todos.filter(task => {
+                return task.task.toLowerCase().includes(searchedTask);
+            })
+            if (todoData) res.status(200).send(todoData);
+            else res.status(400).send(errorMessage("Task you have searched is empty")); 
+        }
+        else{
+            res.status(400).send(errorMessage("Please fill your keyword"));
+        }
     },
 
-    updateTodobyId: (req, res) => {
-        // const data = TODOS.data.find(item => {
-        //     return item.id === Number(req.params.id)
-        // })
+    updateTodoById: (req, res) => {
+        const updatedId = Number(req.params.id);
+        
+        const todoTask = req.body.task;
+        const todoPriority = req.body.priority;
+        const todoDeadline = req.body.deadline;
 
-        // if (data) {
-        //     const updateData = {
-        //         id: req.params.id,
-        //         text: req.body.text
-        //     }
-        //     data["id"] = updateData.id
-        //     data["text"] = updateData.text
-        //     res.status(200).send(data)
-        // }
-        // else {
-        //     res.status(404).send({
-        //         message: "Id not found"
-        //     })
-        // }
+        if (updatedId){
+            if(todoTask && todoPriority && todoDeadline) {
+                const todoData = TODOS.todos.find(item => {
+                    return item.id === updatedId;
+                });
+
+                if (todoData){
+                    todoData.task = todoTask;
+                    todoData.priority = todoPriority;
+                    todoData.deadline = todoDeadline;
+
+                    const todosString = JSON.stringify(TODOS, null, 2);
+                    fs.writeFileSync(todosJSON, todosString, 'utf8');
+
+                    res.status(202).send(todoData);
+                }
+                else{
+                    res.status(400).send(errorMessage(`Data with ID ${updatedId} doesn't exists`));
+                }
+            }
+            else{
+                res.status(400).send(errorMessage("You have to fill all of your data properties"));
+            }
+        }
+        else{
+            res.status(400).send(errorMessage("Please choose task you want to edit"));
+        }
     },
 
     deleteTodobyId: (req, res) => {
