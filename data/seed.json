@@ -35,7 +35,13 @@
       "task": "Playing with laptop",
       "priority": "low",
       "deadline": "2018-08-20"
+    },
+    {
+      "id": 7,
+      "task": "Learning Node.JS happily",
+      "priority": "medium",
+      "deadline": "2018-09-09"
     }
   ],
-  "idCounter": 6
+  "idCounter": 7
 }
