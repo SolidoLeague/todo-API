@@ -3,25 +3,12 @@ const fs = require("fs")
 const todosJSON = "./data/seed.json"
 const TODOS = JSON.parse(fs.readFileSync(todosJSON, 'utf8'))
 
-// const respond = (res, code, data) => {
-//     const value = res.status(code).send(data);
-//     return value;
-// }
-
 const errorMessage = (messageFill) => {
     return {message: messageFill};
 }
 
-// const request = (key) => {
-//     return req.body.key;
-// }
-
 const todos = {
     get: (req, res) => {
-        // if (TODOS.todos) 
-        //     respond(200, TODOS.todos);
-        // else 
-        //     respond(400, errorMessage("Todo data list is empty"));
         TODOS.todos ? res.status(200).send(TODOS.todos):res.status(400).send(errorMessage("Your todo list is empty. Please add new todo list"));
     },
 
@@ -106,21 +93,25 @@ const todos = {
     },
 
     deleteTodobyId: (req, res) => {
-        // const data = TODOS.data.filter(item => {
-        //     return item.id !== Number(req.params.id)
-        // })
-        // const data_JSON = {
-        //     counter: TODOS.counter,
-        //     data: data
-        // }
-        // if (data) {
-        //     const todosString = JSON.stringify(data_JSON, null, 2)
-        //     fs.writeFileSync(todosJSON, todosString, 'utf8');
-        //     res.status(200).send(data)
-        // }
-        // else {
-        //     res.status(404).send({ message: "Id not found" })
-        // }
+        const searchedId = Number(req.params.id);
+        
+        if (searchedId){
+            const todoData = TODOS.todos.find(item => {
+                return item.id === searchedId;
+            });
+
+            if (todoData){
+                const index = TODOS.todos.indexOf(todoData);
+                TODOS.todos.splice(index, 1);
+                res.status(200).send({message: `Data with ID ${searchedId} has been deleted`});
+            }
+            else{
+                res.status(400).send(errorMessage("Todo data doesn't exist"));
+            }
+        }
+        else{
+            res.status(400).send(errorMessage("Please choose task you want to delete"));
+        }
     }
 };
 
