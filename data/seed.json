@@ -41,7 +41,19 @@
       "task": "Learning Node.JS happily",
       "priority": "medium",
       "deadline": "2018-09-09"
+    },
+    {
+      "id": 10,
+      "task": "API",
+      "priority": "medium",
+      "deadline": "2018-12-12"
+    },
+    {
+      "id": 11,
+      "task": "xxx",
+      "priority": "medium",
+      "deadline": "2018-10-10"
     }
   ],
-  "idCounter": 7
+  "idCounter": 11
 }
