@@ -15,13 +15,12 @@ app.use(function(req, res, next) {
     next();
 });
 
+
 app.get("/todos", todos.get);
 app.get("/todos/:search",todos.getOnebyCharacters);
 app.post("/todos", todos.add);
 app.put("/todos/:id", todos.updateTodoById);
-app.delete("/todos/:id",todos.deleteTodoById)
-
-
+app.delete("/todos/:id", todos.deleteTodobyId);
 
 
 app.listen(port, () => {
